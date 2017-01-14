@@ -8,23 +8,23 @@ Step 1
 Build the publisher image locally
 Make sure to follow the README and put the aem source jar and the license files in the resource directory.  Since it requires your install media you have to build this locally.
 ```
-cd ../publish-tar
-docker build -t aem_6-2_publish .
+cd ../publish
+docker build -t aem_6-1_publish .
 ```
 
 Step 2
 Build the author image locally
 Make sure to follow the README and put the aem source jar and the license files in the resource directory.  Since it requires your install media you have to build this locally.
 ```
-cd ../author-tar
-docker build -t aem_6-2_author .
+cd ../author
+docker build -t aem_6-1_author .
 ```
 
 Step 3
 Build the dispatcher image.
 ```
-cd ../dispatcher-ps
-docker build -t aem_6-2_dispatcher  .
+cd ../dispatcher
+docker build -t aem_6-1_dispatcher  .
 ```
 now if you run
 ```
@@ -45,6 +45,4 @@ put it in root directory where you want all the build scripts and git clones to 
 docker-compose up -d
 ```
 to bring it all up
-
-I need to find the right command to show the local VM's ip address so you can connect to the new enviroment.  Today I am using Kitematic on my mac to show me the access urls.
 

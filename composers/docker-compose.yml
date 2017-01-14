@@ -5,14 +5,14 @@ publish:
     ports:
         - "4503:4503"
 
-# author:
-#     hostname: author.bawslocal.com
-#     image: aem_6-1_author
-#     mem_limit: 2g
-#     ports:
-#         - "4502:4502"
-#     links:
-#         - publish
+author:
+    hostname: author.bawslocal.com
+    image: aem_6-1_author
+    mem_limit: 2g
+    ports:
+        - "4502:4502"
+    links:
+        - publish
 
 dispatcher:
     hostname: www.bawslocal.com

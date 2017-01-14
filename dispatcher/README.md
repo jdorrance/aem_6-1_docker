@@ -3,11 +3,11 @@
 Apache 2.4, dispatcher and Google pagespeed
 
 ```
-docker build -t aem_6-2_dispatcher .
+docker build -t aem_6-1_dispatcher .
 ```
 run the image with this command
 ```
-docker run --name AEM_DISPATCHER -t aem_6-2_dispatcher
+docker run --name AEM_DISPATCHER -t aem_6-1_dispatcher
 ```
 
 Working but we still need to do more tuning.  As if everything in life it can be better and we can improve it.
