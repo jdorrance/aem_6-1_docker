@@ -8,7 +8,7 @@ dependencies:
     - eval $(aws ecr get-login --region us-east-1)
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
+    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
 
 test:
   override:
