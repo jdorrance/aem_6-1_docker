@@ -9,11 +9,18 @@ dependencies:
     # forces a docker login against the AWS generated access token
     - eval $(aws ecr get-login --region us-east-1)
   override:
-    # these are so long because am trying to support parallel builds
     # attempt to get the 'latest' docker base, this will aid in caching, then build - and tag with the circle build number
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest || true && docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest base/. && docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true && docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest author/. && docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true && docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest publish/. && docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM
+    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest || true
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest base/.
+    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
+    # now for author
+    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest author/.
+    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM
+    # now for publish
+    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest publish/.
+    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM
 
 test:
   override:
@@ -27,6 +34,12 @@ deployment:
     branch: master
     commands:
       # login again for good measure, and push both the latest tag and tagged by build number images
-      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest && docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
-      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest && docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM
-      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest && docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM
+      # push base
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
+      # push author
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM
+      # push publish
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM
