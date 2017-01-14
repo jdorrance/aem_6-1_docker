@@ -1,0 +1,18 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - pip install awscli
+    - eval $(aws ecr get-login --region us-east-1)
+    - docker pull -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - aws ecr get-login --region us-east-1
+      - eval $(aws ecr get-login --region us-east-1)
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
