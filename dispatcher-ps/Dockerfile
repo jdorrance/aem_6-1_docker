@@ -5,6 +5,7 @@ LABEL description="AEM publish dispatcher.  Uses Apache and Google Pagespeed"
 MAINTAINER dbenge
 
 RUN apt-get -y install apache2 apache2-utils libssl1.0.0 libssl-dev
+RUN apt-get install -y dos2unix
 
 # Configure timezone and locale
 RUN echo "US/Pacific" > /etc/timezone && \
@@ -32,6 +33,7 @@ RUN chown -R www-data:www-data *
 WORKDIR /aem/dispatcher/
 RUN mkdir logs
 COPY resources/dispatcher.any dispatcher.any
+RUN dos2unix dispatcher.any
 WORKDIR /lib/x86_64-linux-gnu/
 RUN ln -s libssl.so.1.0.0 libssl.so.10
 RUN ln -s libcrypto.so.1.0.0 libcrypto.so.10
@@ -39,14 +41,16 @@ RUN ln -s libcrypto.so.1.0.0 libcrypto.so.10
 #Copies required mods
 WORKDIR /etc/apache2/mods-available/
 COPY resources/mods-available/* ./
+RUN dos2unix ./*
 WORKDIR /etc/apache2/sites-available/
 COPY resources/sites-available/* ./
+RUN dos2unix ./*
 
 #enable mods and site
 RUN a2enmod rewrite dispatcher ssl pagespeed expires headers
 RUN a2dissite 000-default
 RUN a2ensite aemsite
 
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-
+#ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+ENTRYPOINT ["/bin/sh"]
 EXPOSE 80 443

@@ -2,7 +2,10 @@
 FROM aem_6-2_base
 LABEL version="1.0"
 LABEL description="AEM author docker image"
-MAINTAINER dbenge
+MAINTAINER smurfsky101
+
+# In case windows line endings exist, yuck
+RUN apt-get -y install dos2unix
 
 #Copies required build media
 ADD resources/*.jar /aem/cq-author-4502.jar
@@ -10,6 +13,9 @@ ADD resources/license.properties /aem/license.properties
 ADD resources/postInstallHook.py /aem/postInstallHook.py
 ADD resources/packagelist.txt /aem/packagelist.txt
 #ADD resources/packages/*.zip /aem/packages/
+
+# Cleanup windows line just in case
+RUN dos2unix /aem/*
 
 # Extracts AEM
 WORKDIR /aem
@@ -20,6 +26,9 @@ RUN java -Djava.awt.headless=true -XX:MaxPermSize=256m -Xmx1280m -jar cq-author-
 ADD resources/org.apache.sling.commons.log.LogManager.config /aem/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config
 ADD resources/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg /aem/crx-quickstart/install/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg
 
+# Cleanup windows line just in case
+RUN dos2unix resources/*
+
 # Installs AEM
 WORKDIR /aem
 RUN ["python","aemInstaller.py","-i","cq-author-4502.jar","-r","author","-p","4502"]
@@ -29,8 +38,7 @@ RUN mv quickstart quickstart.original
 ADD resources/quickstart /aem/crx-quickstart/bin/quickstart
 
 # Convert from windows line endings, just in case
-RUN sed -i -e 's/\r$//' /aem/crx-quickstart/bin/quickstart
-RUN sed -i -e 's/\r$//' /aem/compaction.sh
+RUN dos2unix /aem/crx-quickstart/bin/*
 
 # Make AEM executable
 RUN chmod +x /aem/crx-quickstart/bin/quickstart

@@ -2,9 +2,13 @@
 FROM ubuntu:14.04
 LABEL version="1.0"
 LABEL description="AEM base image"
-MAINTAINER dbenge
+MAINTAINER smurfsky101
 
 ENV DEBIAN_FRONTEND noninteractive
+
+# In case windows line endings exist, yuck
+RUN apt-get update
+RUN apt-get -y install dos2unix
 
 # Install utility for AEM
 ADD aemInstaller.py /aem/aemInstaller.py
@@ -14,7 +18,10 @@ ADD oak-run-1.2.2.jar /aem/oak-run.jar
 ADD compaction.sh /aem/compaction.sh
 ADD org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg /aem/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg
 
-RUN apt-get update
+# Cleanup windows line just in case
+RUN dos2unix /aem/*
+
+
 RUN apt-get -y install software-properties-common
 RUN apt-get -y install ipython ipython3
 RUN apt-get -y install python-psutil

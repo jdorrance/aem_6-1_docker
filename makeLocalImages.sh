@@ -18,15 +18,15 @@ function build {
   echo "done building ${1} container"
 }
 
-#build "base"
+build "base"
 
 #getinput "publish"
-build "publish-tar"
+build "publish"
 
 #getinput "author"
-build "author-tar"
+build "author"
 
-build "dispatcher-ps"
+build "dispatcher"
 
 sh -c 'cd composedev-tar'
 echo 'Now go into composedev-tar and run this command:./start-containers.sh'
