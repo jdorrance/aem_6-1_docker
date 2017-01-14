@@ -1,5 +1,5 @@
 # DOCKER-VERSION 1.7.0 PUBLISHER
-FROM aem_6-1_base
+FROM aem_6-1_base:latest
 LABEL version="1.0"
 LABEL description="AEM publisher docker image"
 MAINTAINER smurfsky101
