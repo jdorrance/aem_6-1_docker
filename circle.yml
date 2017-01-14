@@ -13,14 +13,14 @@ dependencies:
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
     - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest aem_6-1_base
     # author
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author 
+    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
+    #- docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author 
     # publish
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish 
+    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
+    #- docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish 
     # dispatcher
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher 
+    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest || true
+    #- docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher 
   override:
     - docker images
     # now for author
