@@ -8,8 +8,8 @@ MAINTAINER smurfsky101
 RUN apt-get -y install dos2unix
 
 #Copies required build media
-ADD resources/*.jar /aem/cq-publish-4503.jar
-ADD resources/license.properties /aem/license.properties
+ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/AEM_6.1.jar /aem/cq-publish-4503.jar
+ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/license.properties /aem/license.properties
 ADD resources/postInstallHook.py /aem/postInstallHook.py
 ADD resources/packagelist.txt /aem/packagelist.txt
 #ADD resources/packages/*.zip /aem/packages/
