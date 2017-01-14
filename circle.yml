@@ -8,15 +8,16 @@ dependencies:
     - pip install awscli
     # forces a docker login against the AWS generated access token
     - eval $(aws ecr get-login --region us-east-1)
-  override:
     # attempt to get the 'latest' docker base, this will aid in caching, then build - and tag with the circle build number
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest || true
     - docker build -t aem_6-1_base -t aem_6-1_base:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
+  override:
     # now for author
-    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
+    - docker images
+    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
     - docker build -t aem_6-1_author -t aem_6-1_author:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM author/.
     # now for publish
-    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
+    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
     - docker build -t aem_6-1_publish -t aem_6-1_publish:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM publish/.
 
 test:
