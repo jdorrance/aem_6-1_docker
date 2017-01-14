@@ -12,7 +12,7 @@ dependencies:
 
 test:
   override:
-    - docker run aem_6-1_base:$CIRCLE_BUILD_NUM /bin/sh -c ps aux
+    - docker run 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM /bin/sh -c ps aux
 
 deployment:
   production:
