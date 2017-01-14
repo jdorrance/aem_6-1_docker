@@ -14,30 +14,30 @@ dependencies:
     - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest aem_6-1_base
     # author
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author --force
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author 
     # publish
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish --force
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish 
     # dispatcher
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher --force
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher 
   override:
     - docker images
     # now for author
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM author/.
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author:latest --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author:latest 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest 
     # now for publish
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM publish/.
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish:latest --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish:latest 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest 
     # now for dispatcher
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM dispatcher/.
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher:latest --force
-    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher:latest 
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest 
 test:
   override:
     # make sure we can run the container
