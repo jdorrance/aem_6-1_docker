@@ -3,12 +3,13 @@ machine:
     - docker
 
 dependencies:
-  override:
+  pre: 
     - pip install awscli
     - eval $(aws ecr get-login --region us-east-1)
-    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
-    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
-    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
+  override:
+    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest || true
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest base/.
+    - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
 
 test:
   override:
@@ -19,5 +20,5 @@ deployment:
     branch: master
     commands:
       - eval $(aws ecr get-login --region us-east-1)
-      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
       - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest
+      - docker push 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM
