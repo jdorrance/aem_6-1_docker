@@ -1,12 +1,12 @@
 publish:
-    hostname: pub.adobeatadobe.com
+    hostname: pub.bawslocal.com
     image: aem_6-2_publish
     mem_limit: 2g
     ports:
         - "4503:4503"
 
 author:
-    hostname: author.adobeatadobe.com
+    hostname: author.bawslocal.com
     image: aem_6-2_author
     mem_limit: 2g
     ports:
@@ -15,7 +15,7 @@ author:
         - publish
 
 dispatcher:
-    hostname: www.adobeatadobe.com
+    hostname: www.bawslocal.com
     image: aem_6-2_dispatcher 
     ports:
         - "80:80"
