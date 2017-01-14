@@ -14,22 +14,30 @@ dependencies:
     - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest aem_6-1_base
     # author
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author --force
     # publish
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish --force
     # dispatcher
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest || true
-    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher
+    - docker tag 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher --force
   override:
     - docker images
     # now for author
-    - docker build -t aem_6-1_author -t aem_6-1_author:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM author/.
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM author/.
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM aem_6-1_author:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest --force
     # now for publish
-    - docker build -t aem_6-1_publish -t aem_6-1_publish:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM publish/.
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM publish/.
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM aem_6-1_publish:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest --force
     # now for dispatcher
-    - docker build -t aem_6-1_dispatcher -t aem_6-1_dispatcher:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM dispatcher/.
-
+    - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM dispatcher/.
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM aem_6-1_dispatcher:latest --force
+    - docker tag  781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:$CIRCLE_BUILD_NUM 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest --force
 test:
   override:
     # make sure we can run the container
