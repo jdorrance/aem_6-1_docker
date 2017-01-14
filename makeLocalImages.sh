@@ -18,12 +18,12 @@ function build {
   echo "done building ${1} container"
 }
 
-build "base"
+#build "base"
 
-getinput "publish"
+#getinput "publish"
 build "publish-tar"
 
-getinput "author"
+#getinput "author"
 build "author-tar"
 
 build "dispatcher-ps"
