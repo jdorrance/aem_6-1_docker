@@ -3,34 +3,24 @@ machine:
     - docker
 
 dependencies:
-  cache_directories:
-    - "~/docker"
   pre: 
     # the AWS credentials must be set upin the CircleCI build
     - pip install awscli
     # forces a docker login against the AWS generated access token
     - eval $(aws ecr get-login --region us-east-1)
     # attempt to get the 'latest' docker base, this will aid in caching, then build - and tag with the circle build number
-    - if [[ -e ~/docker/aem_6-1_base.tar ]]; then docker load --input ~/docker/aem_6-1_base.tar; fi
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest || true
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
     - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest aem_6-1_base
-    - mkdir -p ~/docker; docker save 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:latest > ~/docker/aem_6-1_base.tar
     # author
-    - if [[ -e ~/docker/aem_6-1_author.tar ]]; then docker load --input ~/docker/aem_6-1_author.tar; fi
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest || true
     - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest aem_6-1_author 
-    - mkdir -p ~/docker; docker save 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_author:latest > ~/docker/aem_6-1_author.tar
     # publish
-    - if [[ -e ~/docker/aem_6-1_publish.tar ]]; then docker load --input ~/docker/aem_6-1_publish.tar; fi
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest || true
     - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest aem_6-1_publish 
-    - mkdir -p ~/docker; docker save 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_publish:latest > ~/docker/aem_6-1_publish.tar
     # dispatcher
-    - if [[ -e ~/docker/aem_6-1_dispatcher.tar ]]; then docker load --input ~/docker/aem_6-1_dispatcher.tar; fi
     - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest || true
     - docker tag -f 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest aem_6-1_dispatcher 
-    - mkdir -p ~/docker; docker save 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_dispatcher:latest > ~/docker/aem_6-1_dispatcher.tar
   override:
     - docker images
     # now for author
