@@ -7,8 +7,12 @@ dependencies:
     - pip install awscli
     - aws ecr get-login --region us-east-1
     - eval $(aws ecr get-login --region us-east-1)
-    #- docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_PREVIOUS_BUILD_NUM
+    - docker pull 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_PREVIOUS_BUILD_NUM
     - docker build -t 781401380984.dkr.ecr.us-east-1.amazonaws.com/aem_6-1_base:$CIRCLE_BUILD_NUM base/.
+
+test:
+  override:
+    - docker run aem_6-1_base:$CIRCLE_BUILD_NUM /bin/sh -c ps aux
 
 deployment:
   production:
