@@ -8,11 +8,11 @@ MAINTAINER smurfsky101
 RUN apt-get -y install dos2unix
 
 #Copies required build media
-ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/AEM_6.1.jar /aem/cq-author-4502.jar
-ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/license.properties /aem/license.properties
+ADD http://mavendc-utils.s3.amazonaws.com/internal/cq6/AEM_6.1.jar /aem/cq-author-4502.jar
+ADD http://mavendc-utils.s3.amazonaws.com/internal/cq6/license.properties /aem/license.properties
 ADD resources/postInstallHook.py /aem/postInstallHook.py
 ADD resources/packagelist.txt /aem/packagelist.txt
-#ADD resources/packages/*.zip /aem/packages/
+ADD resources/packages/*.zip /aem/packages/
 
 # Cleanup windows line just in case
 RUN dos2unix /aem/*
@@ -27,7 +27,7 @@ ADD resources/org.apache.sling.commons.log.LogManager.config /aem/crx-quickstart
 ADD resources/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg /aem/crx-quickstart/install/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg
 
 #Add service Pack 2
-ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/6.1/servicepacks/aem-service-pkg-wrapper-6.1.SP2.jar /aem/crx-quickstart/install/aem-service-pkg-wrapper-6.1.SP2.jar
+ADD http://mavendc-utils.s3.amazonaws.com/internal/cq6/6.1/servicepacks/aem-service-pkg-wrapper-6.1.SP2.jar /aem/crx-quickstart/install/aem-service-pkg-wrapper-6.1.SP2.jar
 
 # Cleanup windows line just in case
 RUN dos2unix /aem/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config
