@@ -26,6 +26,9 @@ RUN java -Djava.awt.headless=true -XX:MaxPermSize=256m -Xmx1280m -jar cq-author-
 ADD resources/org.apache.sling.commons.log.LogManager.config /aem/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config
 ADD resources/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg /aem/crx-quickstart/install/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg
 
+#Add service Pack 2
+ADD https://mavendc-utils.s3.amazonaws.com/internal/cq6/6.1/servicepacks/aem-service-pkg-wrapper-6.1.SP2.jar /aem/crx-quickstart/install/aem-service-pkg-wrapper-6.1.SP2.jar
+
 # Cleanup windows line just in case
 RUN dos2unix /aem/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config
 RUN dos2unix /aem/crx-quickstart/install/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.cfg
