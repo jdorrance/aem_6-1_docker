@@ -1,0 +1,22 @@
+version: "3"
+services:
+  author:
+    build: .
+    hostname: author.bawslocal.com
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 1g
+    volumes:
+      - autrepository:/aem/crx-quickstart/repository
+    ports:
+      - "4502:4502"
+      - "35729:35729"
+    environment:
+      - CQ_RUNMODE=author,nosamplecontent,docker
+
+
+volumes:
+  autrepository:
