@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+  publish:
+    #build: ./publish
+    image: smurfsky101/6-1_publish:latest
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 1g
+    volumes:
+      - pubrepository:/aem/crx-quickstart/repository
+    ports:
+      - "4503:4503"
+
+  author:
+    #build: ./author
+    image: smurfsky101/6-1_author:latest
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 1g
+    volumes:
+      - autrepository:/aem/crx-quickstart/repository
+    ports:
+      - "4502:4502"
+      - "35729:35729"
+    links:
+      - publish
+    environment:
+      - CQ_RUNMODE=author,nosamplecontent,docker
+
+  dispatcher:
+    #build: ./dispatcher
+    image: smurfsky101/6-1_dispatcher:latest
+    ports:
+      - "80:80"
+    links:
+      - publish
+
+
+volumes:
+  autrepository:
+  pubrepository:

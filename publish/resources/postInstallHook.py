@@ -1,17 +1,13 @@
 import pycurl
 import os
-from urllib import urlencode, quote
 
-#
-# Script is used to set the replication URI.
-
-#
 baseUrl="http://localhost:4503"
 password="admin:admin"
 
 packageList = "packagelist.txt"
 current_dir = os.getcwd()
 print "Current directory " + current_dir
+
 if os.path.isfile(packageList):
     with open(packageList) as fp:
         for package in fp:

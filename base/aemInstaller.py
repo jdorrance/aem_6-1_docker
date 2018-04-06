@@ -9,12 +9,9 @@ from time import sleep
 # Argument definition
 usage = "usage: %prog [options] arg"
 parser = OptionParser(usage)
-parser.add_option("-i", "--install_file", dest="filename",
-                  help="AEM install file")
-parser.add_option("-r", "--runmode",
-                  dest="runmode",help="Run mode for the installation")
-parser.add_option("-p", "--port", dest="port",
-                  help="Port for instance")
+parser.add_option("-i", "--install_file", dest="filename",help="AEM install file")
+parser.add_option("-r", "--runmode",dest="runmode",help="Run mode for the installation")
+parser.add_option("-p", "--port", dest="port", help="Port for instance")
 
 options, args = parser.parse_args()
 optDic = vars(options)
@@ -78,7 +75,7 @@ print "Stopping instance"
 # If the success message was recieved, attempt to close all associated
 # processes.
 #
-if successfulStart == True:
+if successfulStart:
   parentAEMprocess= psutil.Process(installProcess.pid)
   for childProcess in parentAEMprocess.get_children():
     os.kill(childProcess.pid,signal.SIGINT)

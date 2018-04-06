@@ -33,7 +33,7 @@ CQ_NOFORK='true'
 #CQ_FORKARGS=''
 
 # runmode(s)
-CQ_RUNMODE='publish,nosamplecontent'
+#CQ_RUNMODE='publish,nosamplecontent'
 
 # defines the path under which the quickstart work folder is located
 #CQ_BASEFOLDER=''
@@ -48,10 +48,10 @@ CQ_RUNMODE='publish,nosamplecontent'
 # CQ_USE_JAAS='true'
 
 # config for jaas
-CQ_JAAS_CONFIG='etc/jaas.config'
+#CQ_JAAS_CONFIG='etc/jaas.config'
 
 # default JVM options
-CQ_JVM_OPTS='-XX:MaxPermSize=512M -Xmx2G -XX:+UseParallelGC -XX:+UseParallelOldGC'
+#CQ_JVM_OPTS='-XX:MaxPermSize=512M -Xmx2G -XX:+UseParallelGC -XX:+UseParallelOldGC'
 
 # file size limit (ulimit)
 CQ_FILE_SIZE_LIMIT=8192

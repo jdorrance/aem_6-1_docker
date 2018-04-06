@@ -1,4 +1,4 @@
-# AdobeAtAdobe's docker AEM 6.2 Publish Dispatcher 4.1.9 image
+# AdobeAtAdobe's docker AEM 6.1 Publish Dispatcher 4.1.9 image
 
 Apache 2.4, dispatcher and Google pagespeed
 
