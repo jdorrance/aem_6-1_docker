@@ -34,6 +34,10 @@ ADD resources/quickstart /aem/crx-quickstart/bin/quickstart
 # Convert from windows line endings, just in case
 RUN dos2unix /aem/crx-quickstart/bin/*
 
+# to make the image size smaller
+RUN rm -rf /aem/crx-quickstart/repository/index
+RUN rm -rf /aem/crx-quickstart/repository/segmentstore
+
 ###### STAGE 2
 FROM smurfsky101/docker-ubuntu-14-04-java8:2
 LABEL version="1.0"

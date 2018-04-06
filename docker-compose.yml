@@ -2,7 +2,7 @@ version: "3"
 services:
 
   publish:
-    #build: ./publish
+    build: ./publish
     image: smurfsky101/6-1_publish:latest
     deploy:
       resources:
@@ -16,7 +16,7 @@ services:
       - "4503:4503"
 
   author:
-    #build: ./author
+    build: ./author
     image: smurfsky101/6-1_author:latest
     deploy:
       resources:
@@ -35,7 +35,7 @@ services:
       - CQ_RUNMODE=author,nosamplecontent,docker
 
   dispatcher:
-    #build: ./dispatcher
+    build: ./dispatcher
     image: smurfsky101/6-1_dispatcher:latest
     ports:
       - "80:80"
